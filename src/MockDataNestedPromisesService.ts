@@ -1,25 +1,13 @@
 import { IObjectCell } from './IObjectCell';
-import { getObjectCells as get1kObjectCells } from './MockDataServiceObjectCells1k';
-import { getObjectCells as get10kObjectCells } from './MockDataServiceObjectCells10k';
+import { MockDataPromisesService } from './MockDataPromisesService';
 
-export type Reporter = (msg: string) => void;
-
-export class MockDataNestedPromisesService {
-	private _toUpper: boolean = true;
-	private _objectCells: IObjectCell[] = [];
-
-	constructor(private _reporter?: Reporter) {}
-
-	public get objectCells() {
-		return this._objectCells;
-	}
-
+export class MockDataNestedPromisesService extends MockDataPromisesService {
 	private formatKeyValue(
 		key: string,
 		value: string,
 	): Promise<[string, string]> {
 		return new Promise(resolve => {
-			const resolvedValue = this._toUpper
+			const resolvedValue = this.toUpper
 				? value.toUpperCase()
 				: value.toLowerCase();
 			resolve([key, resolvedValue]);
@@ -44,37 +32,16 @@ export class MockDataNestedPromisesService {
 			});
 		});
 	}
-
-	private async getObjectCells(
-		getObjectCells: () => Array<IObjectCell>,
-	): Promise<void> {
-		const start = new Date();
-		this._objectCells = getObjectCells();
-		const end = new Date();
-		const durationMs = end.getTime() - start.getTime();
-
-		console.log(
-			`populated ${this._objectCells.length} object cells in ${durationMs} ms`,
-		);
-	}
-
-	public onGet1kObjectCells(): void {
-		this.getObjectCells(get1kObjectCells);
-	}
-
-	public onGet10kObjectCells(): void {
-		this.getObjectCells(get10kObjectCells);
-	}
 	
-	public format(): Promise<void> {
+	public override format(): Promise<void> {
 		const start = new Date();
 
 		const objectCellPromises: Array<Promise<IObjectCell>> = [];
-		for (const objectCell of this._objectCells) {
+		for (const objectCell of this.objectCells) {
 			objectCellPromises.push(this.formatObjectCell(objectCell));
 		}
 
-		this._toUpper = !this._toUpper;
+		this.toUpper = !this.toUpper;
 		
 		return Promise.all(objectCellPromises).then((objectCells: Array<IObjectCell>) => {
 			const end = new Date();
@@ -83,11 +50,11 @@ export class MockDataNestedPromisesService {
 				`formatted ${objectCells.length} object cells in ${durationMs} ms via nested promises.`,
 			);
 
-			if (this._reporter) {
-				this._reporter(`formatted ${objectCells.length} object cells in ${durationMs} ms via nested promises.`);
+			if (this.reporter) {
+				this.reporter(`formatted ${objectCells.length} object cells in ${durationMs} ms via nested promises.`);
 			}
 
-			this._objectCells = objectCells;
+			this.objectCells = objectCells;
 		});
 	}
 }

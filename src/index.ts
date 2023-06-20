@@ -18,14 +18,14 @@ async function main(): Promise<void> {
 	const mockDataNestedPromisesService = new MockDataNestedPromisesService();
 	const mockDataFlatPromisesService = new MockDataFlatPromisesService();
 
-	mockDataFlatPromisesService.onGet10kObjectCells();
+	mockDataFlatPromisesService.populate10kObjectCells();
 	await mockDataFlatPromisesService.format();
 	await mockDataFlatPromisesService.format();
 	await mockDataFlatPromisesService.format();
 	await mockDataFlatPromisesService.format();
 	await mockDataFlatPromisesService.format();
 
-	mockDataNestedPromisesService.onGet10kObjectCells();
+	mockDataNestedPromisesService.populate10kObjectCells();
 	await mockDataNestedPromisesService.format();
 	await mockDataNestedPromisesService.format();
 	await mockDataNestedPromisesService.format();
