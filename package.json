@@ -22,7 +22,7 @@
     "typescript": "^5.1.3"
   },
   "scripts": {
-    "compile": "parcel build --cache-dir parcelCache",
+    "compile": "parcel build",
     "lint": "eslint . --ext .ts",
     "check": "tsc --noEmit",
     "prepare": "yarn.cmd run compile",
