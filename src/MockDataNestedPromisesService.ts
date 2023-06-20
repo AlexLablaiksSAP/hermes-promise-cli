@@ -10,6 +10,10 @@ export class MockDataNestedPromisesService {
 
 	constructor(private _reporter?: Reporter) {}
 
+	public get objectCells() {
+		return this._objectCells;
+	}
+
 	private formatKeyValue(
 		key: string,
 		value: string,
@@ -76,13 +80,12 @@ export class MockDataNestedPromisesService {
 			const end = new Date();
 			const durationMs = end.getTime() - start.getTime();
 			console.log(
-				`formatted ${objectCells.length} object cells in ${durationMs} ms`,
+				`formatted ${objectCells.length} object cells in ${durationMs} ms via nested promises.`,
 			);
 
 			if (this._reporter) {
-				this._reporter(`formatted ${objectCells.length} object cells in ${durationMs} ms`);
+				this._reporter(`formatted ${objectCells.length} object cells in ${durationMs} ms via nested promises.`);
 			}
-			
 
 			this._objectCells = objectCells;
 		});

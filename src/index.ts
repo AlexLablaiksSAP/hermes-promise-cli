@@ -12,10 +12,21 @@ if (isHermes() && !globalThis.console) {
 
 
 import { MockDataNestedPromisesService } from './MockDataNestedPromisesService';
+import { MockDataFlatPromisesService } from './MockDataFlatPromisesService';
 
 async function main(): Promise<void> {
 	const mockDataNestedPromisesService = new MockDataNestedPromisesService();
+	const mockDataFlatPromisesService = new MockDataFlatPromisesService();
+
+	mockDataFlatPromisesService.onGet10kObjectCells();
+	await mockDataFlatPromisesService.format();
+	await mockDataFlatPromisesService.format();
+	await mockDataFlatPromisesService.format();
+	await mockDataFlatPromisesService.format();
+	await mockDataFlatPromisesService.format();
+
 	mockDataNestedPromisesService.onGet10kObjectCells();
+	await mockDataNestedPromisesService.format();
 	await mockDataNestedPromisesService.format();
 	await mockDataNestedPromisesService.format();
 	await mockDataNestedPromisesService.format();
