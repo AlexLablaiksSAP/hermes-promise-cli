@@ -1,1 +1,6 @@
 build
+dist
+node_modules
+
+parcelCache
+**/.parcel-cache
