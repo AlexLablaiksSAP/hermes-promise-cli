@@ -5,7 +5,7 @@ import { getObjectCells as get10kObjectCells } from './MockDataServiceObjectCell
 export type Reporter = (msg: string) => void;
 
 export abstract class MockDataPromisesService {
-	protected toUpper: boolean = true;
+	protected toUpper = true;
 	private _objectCells: IObjectCell[] = [];
 
 	constructor(protected reporter?: Reporter) {}
@@ -17,17 +17,13 @@ export abstract class MockDataPromisesService {
 		this._objectCells = values;
 	}
 
-	protected async getObjectCells(
-		getObjectCells: () => Array<IObjectCell>,
-	): Promise<void> {
+	protected async getObjectCells(getObjectCells: () => Array<IObjectCell>): Promise<void> {
 		const start = new Date();
 		this._objectCells = getObjectCells();
 		const end = new Date();
 		const durationMs = end.getTime() - start.getTime();
 
-		console.log(
-			`populated ${this._objectCells.length} object cells in ${durationMs} ms`,
-		);
+		console.log(`populated ${this._objectCells.length} object cells in ${durationMs} ms`);
 	}
 
 	public populate1kObjectCells(): void {
