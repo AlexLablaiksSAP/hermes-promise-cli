@@ -20,17 +20,17 @@ async function main(): Promise<void> {
 
 	mockDataFlatPromisesService.populate10kObjectCells();
 	await mockDataFlatPromisesService.format();
-	// await mockDataFlatPromisesService.format();
-	// await mockDataFlatPromisesService.format();
-	// await mockDataFlatPromisesService.format();
-	// await mockDataFlatPromisesService.format();
+	await mockDataFlatPromisesService.format();
+	await mockDataFlatPromisesService.format();
+	await mockDataFlatPromisesService.format();
+	await mockDataFlatPromisesService.format();
 
 	mockDataNestedPromisesService.populate10kObjectCells();
 	await mockDataNestedPromisesService.format();
-	// await mockDataNestedPromisesService.format();
-	// await mockDataNestedPromisesService.format();
-	// await mockDataNestedPromisesService.format();
-	// await mockDataNestedPromisesService.format();
+	await mockDataNestedPromisesService.format();
+	await mockDataNestedPromisesService.format();
+	await mockDataNestedPromisesService.format();
+	await mockDataNestedPromisesService.format();
 }
 
 main();
